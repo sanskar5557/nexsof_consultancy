@@ -3,6 +3,7 @@
   padding: calc(var(--navbar-height) + var(--space-16)) 0 var(--space-16);
   background: var(--gradient-hero);
   text-align: center;
+  margin-top: calc(var(--navbar-height) * -1); /* Integrate with fixed navbar */
 }
 
 .contact-hero h1 {

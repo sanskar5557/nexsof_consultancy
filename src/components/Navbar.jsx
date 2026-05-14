@@ -34,7 +34,7 @@ export default function Navbar({ onOpenModal }) {
 
   return (
     <motion.nav
-      className={`navbar ${scrolled ? 'scrolled' : ''}`}
+      className={`navbar ${scrolled || mobileOpen ? 'scrolled' : ''}`}
       initial={{ y: -80 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}

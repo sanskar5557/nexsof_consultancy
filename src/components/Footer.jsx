@@ -32,7 +32,7 @@ export default function Footer() {
 
           <div className="footer-column">
             <h4>Our Services</h4>
-            <NavLink to="/services">Nexsof.tech</NavLink>
+            <NavLink to="https://www.nexsof.tech/en">Nexsof.tech</NavLink>
             <NavLink to="/services">Nexsof.event</NavLink>
             <NavLink to="https://nexsof-production.vercel.app/">Nexsof.production</NavLink>
             <NavLink to="/services">Nexsof.legal</NavLink>
@@ -47,7 +47,7 @@ export default function Footer() {
             </div>
             <div className="footer-contact-item">
               <Phone size={16} />
-              <span>+91 93057 52741</span>
+              <span>+91 93057 541</span>
             </div>
             <div className="footer-contact-item">
               <MapPin size={16} />

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Code, Calendar, Megaphone, Scale, TrendingUp, Rocket, Shield, Users, Zap, Star, ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react';
+import { Code, Calendar, Megaphone, Scale, TrendingUp, Rocket, Shield, Users, Zap, Star, ChevronLeft, ChevronRight, ChevronDown, Quote } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import '../styles/home.css';
 
@@ -40,13 +40,13 @@ export default function Home({ onOpenModal }) {
   const [testimonialIdx, setTestimonialIdx] = useState(0);
   const trackRef = useRef(null);
 
-  const nextTestimonial = () => setTestimonialIdx((i) => (i + 1) % (testimonials.length - 2));
-  const prevTestimonial = () => setTestimonialIdx((i) => (i - 1 + testimonials.length - 2) % (testimonials.length - 2));
+  const nextTestimonial = () => setTestimonialIdx((i) => (i + 1) % testimonials.length);
+  const prevTestimonial = () => setTestimonialIdx((i) => (i - 1 + testimonials.length) % testimonials.length);
 
   useEffect(() => {
-    const interval = setInterval(nextTestimonial, 4000);
+    const interval = setInterval(nextTestimonial, 5000); // 5 seconds for better reading
     return () => clearInterval(interval);
-  }, []);
+  }, [testimonialIdx]); // Re-run interval when index changes to reset timer
 
   return (
     <>
@@ -170,32 +170,60 @@ export default function Home({ onOpenModal }) {
             <p className="section-subtitle">Real stories from founders and businesses we've helped grow.</p>
           </AnimatedSection>
 
-          <div className="testimonials-track" ref={trackRef}>
-            {testimonials.map((t, i) => (
-              <motion.div
-                key={i}
-                className="testimonial-card"
-                animate={{ x: -testimonialIdx * 406 }}
-                transition={{ type: 'spring', stiffness: 200, damping: 30 }}
-              >
-                <div className="testimonial-stars">
-                  {[...Array(5)].map((_, si) => <Star key={si} size={16} fill="currentColor" />)}
-                </div>
-                <p className="testimonial-text">"{t.text}"</p>
-                <div className="testimonial-author">
-                  <div className="testimonial-avatar">{t.initials}</div>
-                  <div>
-                    <div className="testimonial-name">{t.name}</div>
-                    <div className="testimonial-role">{t.role}</div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+          <div className="testimonials-track-wrapper">
+            <motion.div 
+              className="testimonials-track" 
+              ref={trackRef}
+              animate={{ x: `-${testimonialIdx * 100}%` }}
+              transition={{ type: 'spring', stiffness: 100, damping: 20 }}
+            >
+              {testimonials.map((t, i) => {
+                const isActive = i === testimonialIdx;
+                return (
+                  <motion.div
+                    key={i}
+                    className={`testimonial-card ${isActive ? 'active' : ''}`}
+                    animate={{ 
+                      scale: isActive ? 1 : 0.95,
+                      opacity: isActive ? 1 : 0.3,
+                    }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    <div className="testimonial-quote-icon">
+                      <Quote size={40} fill="currentColor" />
+                    </div>
+                    <div className="testimonial-stars">
+                      {[...Array(5)].map((_, si) => <Star key={si} size={16} fill="currentColor" />)}
+                    </div>
+                    <p className="testimonial-text">"{t.text}"</p>
+                    <div className="testimonial-author">
+                      <div className="testimonial-avatar">{t.initials}</div>
+                      <div>
+                        <div className="testimonial-name">{t.name}</div>
+                        <div className="testimonial-role">{t.role}</div>
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
           </div>
 
-          <div className="testimonials-controls">
-            <button onClick={prevTestimonial} aria-label="Previous testimonial"><ChevronLeft size={20} /></button>
-            <button onClick={nextTestimonial} aria-label="Next testimonial"><ChevronRight size={20} /></button>
+          <div className="testimonials-footer">
+            <div className="testimonials-dots">
+              {testimonials.map((_, i) => (
+                <button
+                  key={i}
+                  className={`dot ${i === testimonialIdx ? 'active' : ''}`}
+                  onClick={() => setTestimonialIdx(i)}
+                  aria-label={`Go to testimonial ${i + 1}`}
+                />
+              ))}
+            </div>
+            <div className="testimonials-controls">
+              <button onClick={prevTestimonial} aria-label="Previous testimonial"><ChevronLeft size={20} /></button>
+              <button onClick={nextTestimonial} aria-label="Next testimonial"><ChevronRight size={20} /></button>
+            </div>
           </div>
         </div>
       </section>

@@ -121,6 +121,10 @@ body {
   overflow-x: hidden;
 }
 
+main {
+  padding-top: var(--navbar-height);
+}
+
 a {
   text-decoration: none;
   color: inherit;
