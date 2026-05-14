@@ -21,6 +21,13 @@
   margin: 0 auto;
 }
 
+.services-hero p {
+  font-size: var(--font-size-lg);
+  color: rgba(255, 255, 255, 0.6);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
 .services-list {
   padding: var(--space-24) 0;
 }

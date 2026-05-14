@@ -33,32 +33,18 @@
 .navbar-logo {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
-  font-size: var(--font-size-xl);
-  font-weight: 800;
-  color: var(--color-white);
-  letter-spacing: -0.02em;
+  position: relative;
   z-index: 1001;
+  min-width: 180px; /* Ensure enough space for the large logo */
 }
 
-.navbar-logo-icon {
-  width: 40px;
-  height: 40px;
-  background: var(--gradient-blue);
-  border-radius: var(--radius-lg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 900;
-  font-size: var(--font-size-lg);
-  color: var(--color-white);
-}
-
-.navbar-logo span {
-  background: var(--gradient-blue);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.navbar-logo-img {
+  height: 110px;
+  width: auto;
+  display: block;
+  position: relative;
+  top: 15px; /* Offset to make it hang below navbar */
+  transition: all var(--transition-base);
 }
 
 .navbar-links {

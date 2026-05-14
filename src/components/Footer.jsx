@@ -9,8 +9,7 @@ export default function Footer() {
         <div className="footer-grid">
           <div className="footer-brand">
             <div className="footer-logo">
-              <div className="footer-logo-icon">N</div>
-              <span>Nexsof Consultancy</span>
+              <img src="/logo_white.png" alt="Nexsof Logo" className="footer-logo-img" />
             </div>
             <p>From Idea to Empire — We provide end-to-end business growth solutions for startups and enterprises across technology, events, marketing, legal, and finance.</p>
             <div className="footer-socials">

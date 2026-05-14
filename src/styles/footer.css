@@ -27,17 +27,10 @@
   color: var(--color-white);
 }
 
-.footer-logo-icon {
-  width: 36px;
-  height: 36px;
-  background: var(--gradient-blue);
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 900;
-  font-size: var(--font-size-base);
-  color: var(--color-white);
+.footer-logo-img {
+  height: 110px;
+  width: auto;
+  display: block;
 }
 
 .footer-brand p {

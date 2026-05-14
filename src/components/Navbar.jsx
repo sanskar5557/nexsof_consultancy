@@ -41,8 +41,7 @@ export default function Navbar({ onOpenModal }) {
     >
       <div className="navbar-inner">
         <NavLink to="/" className="navbar-logo">
-          <div className="navbar-logo-icon">N</div>
-          <span>Nexsof</span>
+          <img src="/logo_white.png" alt="Nexsof Logo" className="navbar-logo-img" />
         </NavLink>
 
         <div className="navbar-links">
