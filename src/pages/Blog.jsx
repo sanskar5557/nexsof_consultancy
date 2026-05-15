@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight, X } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import '../styles/blog.css';
 
@@ -13,6 +14,8 @@ const blogs = [
 ];
 
 export default function Blog() {
+  const [selectedBlog, setSelectedBlog] = useState(null);
+
   return (
     <>
       <section className="blog-hero">
@@ -38,7 +41,9 @@ export default function Blog() {
                     <p>{blog.desc}</p>
                     <div className="blog-card-meta">
                       <span>{blog.date} · {blog.readTime}</span>
-                      <span className="blog-card-read-more">Read More <ArrowRight size={14} /></span>
+                      <span className="blog-card-read-more" onClick={() => setSelectedBlog(blog)}>
+                        Read More <ArrowRight size={14} />
+                      </span>
                     </div>
                   </div>
                 </motion.div>
@@ -47,6 +52,38 @@ export default function Blog() {
           </div>
         </div>
       </section>
+
+      <AnimatePresence>
+        {selectedBlog && (
+          <div className="blog-modal-overlay" onClick={() => setSelectedBlog(null)}>
+            <motion.div 
+              className="blog-modal-content"
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button className="blog-modal-close" onClick={() => setSelectedBlog(null)}>
+                <X size={20} />
+              </button>
+              <div className={`blog-modal-image ${selectedBlog.cls}`} />
+              <div className="blog-modal-body">
+                <span className="blog-card-tag">{selectedBlog.tag}</span>
+                <h2>{selectedBlog.title}</h2>
+                <div className="blog-modal-meta">
+                  <span>{selectedBlog.date} · {selectedBlog.readTime}</span>
+                </div>
+                <div className="blog-modal-text">
+                  <p>{selectedBlog.desc}</p>
+                  <p>In a real application, this section would contain the full detailed content of the blog post. For now, it serves as a demonstration of the popup functionality, allowing users to read more without navigating away from the main insights page.</p>
+                  <p>Our team at Nexsof Consultancy continually updates our blog with the latest industry trends, actionable advice, and expert perspectives to help your business thrive.</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

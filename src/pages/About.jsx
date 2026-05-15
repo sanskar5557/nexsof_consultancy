@@ -67,14 +67,14 @@ export default function About() {
           </AnimatedSection>
 
           <div className="mission-vision-grid">
-            <AnimatedSection delay={0.1}>
+            <AnimatedSection delay={0.1} className="mv-item">
               <motion.div className="mv-card" whileHover={{ y: -4 }}>
                 <div className="mv-card-icon"><Target size={28} /></div>
                 <h3>Our Mission</h3>
                 <p>To democratize startup success by providing comprehensive, integrated, and affordable business growth solutions. We believe every great idea deserves the infrastructure, expertise, and support to become a thriving enterprise.</p>
               </motion.div>
             </AnimatedSection>
-            <AnimatedSection delay={0.2}>
+            <AnimatedSection delay={0.2} className="mv-item">
               <motion.div className="mv-card" whileHover={{ y: -4 }}>
                 <div className="mv-card-icon"><Eye size={28} /></div>
                 <h3>Our Vision</h3>
@@ -98,14 +98,17 @@ export default function About() {
 
           <div className="timeline">
             {timeline.map((item, i) => (
-              <AnimatedSection key={item.year} delay={i * 0.15}>
-                <div className="timeline-item">
-                  <div className="timeline-dot" />
-                  <div className="timeline-content">
-                    <div className="timeline-year">{item.year}</div>
-                    <h3>{item.title}</h3>
-                    <p>{item.desc}</p>
-                  </div>
+              <AnimatedSection 
+                key={item.year} 
+                delay={i * 0.15} 
+                className="timeline-item"
+                direction={i % 2 === 0 ? 'right' : 'left'}
+              >
+                <div className="timeline-dot" />
+                <div className="timeline-content">
+                  <div className="timeline-year">{item.year}</div>
+                  <h3>{item.title}</h3>
+                  <p>{item.desc}</p>
                 </div>
               </AnimatedSection>
             ))}
